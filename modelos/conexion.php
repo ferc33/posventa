@@ -7,7 +7,7 @@ class Conexion{
 		//$link = new PDO("mysql:host=localhost;port=3306;dbname=pos", //xampp
 		$link = new PDO("mysql:host=localhost;port=3307;dbname=pos", //wamp
 			"root", //Usuario
-			"",); //Contraseña
+			""); //Contraseña
 
 		$link->exec("set names utf8");
 
