@@ -54,6 +54,17 @@
 
 				</a>
 
+			</li>
+
+			<li>
+
+				<a href="proveedores">
+
+					<i class="fa fa-product-hunt"></i>
+					<span>proveedores</span>
+
+				</a>
+
 			</li>';
 
 		}

@@ -6,14 +6,14 @@ $orden = "id";
 
 $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
- ?>
+?>
 
 
 <div class="box box-primary">
 
   <div class="box-header with-border">
 
-    <h3 class="box-title">Recently Added Products</h3>
+    <h3 class="box-title">Productos añadidos recientementez</h3>
 
     <div class="box-tools pull-right">
 
@@ -32,20 +32,20 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
     </div>
 
   </div>
-  
+
   <div class="box-body">
 
     <ul class="products-list product-list-in-box">
 
-    <?php
+      <?php
 
-    for($i = 0; $i < 10; $i++){
+      for ($i = 0; $i < 10; $i++) {
 
-      echo '<li class="item">
+        echo '<li class="item">
 
         <div class="product-img">
 
-          <img src="'.$productos[$i]["imagen"].'" alt="Product Image">
+          <img src="' . $productos[$i]["imagen"] . '" alt="Img del producto">
 
         </div>
 
@@ -53,19 +53,18 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
 
           <a href="" class="product-title">
 
-            '.$productos[$i]["descripcion"].'
+            ' . $productos[$i]["descripcion"] . '
 
-            <span class="label label-warning pull-right">$'.$productos[$i]["precio_venta"].'</span>
+            <span class="label label-warning pull-right">$' . $productos[$i]["precio_venta"] . '</span>
 
           </a>
     
        </div>
 
       </li>';
+      }
 
-    }
-
-    ?>
+      ?>
 
     </ul>
 
@@ -74,7 +73,7 @@ $productos = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
   <div class="box-footer text-center">
 
     <a href="productos" class="uppercase">Ver todos los productos</a>
-  
+
   </div>
 
 </div>
