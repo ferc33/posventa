@@ -1,15 +1,15 @@
 /*=============================================
-EDITAR CATEGORIA
+EDITAR PROVEEDOR
 =============================================*/
-$(".tablas").on("click", ".btnEditarCategoria", function(){
+$(".tablas").on("click", ".btnEditarProveedor", function(){
 
-	var idCategoria = $(this).attr("idCategoria");
+	var idProveedor = $(this).attr("idProveedor");
 
 	var datos = new FormData();
-	datos.append("idCategoria", idCategoria);
+	datos.append("idProveedor", idProveedor);
 
 	$.ajax({
-		url: "ajax/categorias.ajax.php",
+		url: "ajax/proveedores.ajax.php",
 		method: "POST",
 		data: datos,
 		cache: false,
@@ -18,8 +18,8 @@ $(".tablas").on("click", ".btnEditarCategoria", function(){
 		dataType:"json",
 		success: function(respuesta){
 
-			$("#editarCategoria").val(respuesta["categoria"]);
-			$("#idCategoria").val(respuesta["id_categoria"]);
+			$("#editarProveedor").val(respuesta["proveedor"]);
+			$("#idProveedor").val(respuesta["id_proveedor"]);
 
 		}
 
@@ -29,26 +29,26 @@ $(".tablas").on("click", ".btnEditarCategoria", function(){
 })
 
 /*=============================================
-ELIMINAR CATEGORIA
+ELIMINAR PROVEEDOR                  
 =============================================*/
-$(".tablas").on("click", ".btnEliminarCategoria", function(){
+$(".tablas").on("click", ".btnEliminarProveedor", function(){
 
-	var idCategoria = $(this).attr("idCategoria");
+	var idProveedor= $(this).attr("idProveedor");
 
 	swal({
-		title: '¿Está seguro de borrar la categoría?',
+		title: '¿Está seguro de borrar el proveedor?',
 		text: "¡Si no lo está puede cancelar la acción!",
 		type: 'warning',
 		showCancelButton: true,
 		confirmButtonColor: '#3085d6',
 		cancelButtonColor: '#d33',
 		cancelButtonText: 'Cancelar',
-		confirmButtonText: 'Si, borrar categoría!'
+		confirmButtonText: 'Si, borrar proveedor!'
 	}).then(function(result){
 
 		if(result.value){
 
-			window.location = "index.php?ruta=categorias&idCategoria="+idCategoria;
+			window.location = "index.php?ruta=proveedores&idProveedor="+idProveedor;
 
 		}
 

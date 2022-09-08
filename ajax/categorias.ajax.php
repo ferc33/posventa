@@ -13,7 +13,7 @@ class AjaxCategorias{
 
 	public function ajaxEditarCategoria(){
 
-		$item = "id";
+		$item = "id_categoria";
 		$valor = $this->idCategoria;
 
 		$respuesta = ControladorCategorias::ctrMostrarCategorias($item, $valor);

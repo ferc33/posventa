@@ -91,7 +91,7 @@ Class ControladorProveedores{
 				$tabla = "proveedores";
 
 				$datos = array("proveedor"=>$_POST["editarProveedor"],
-					"id"=>$_POST["idProveedor"]);
+					"id_proveedor"=>$_POST["idProveedor"]);
 
 				$respuesta = ModeloProveedores::mdlEditarProveedor($tabla, $datos);
 
@@ -150,8 +150,8 @@ Class ControladorProveedores{
 
 		if(isset($_GET["idProveedor"])){
 
-			$tabla ="Proveedores";
-			$datos = $_GET["id"];
+			$tabla ="proveedores";
+			$datos = $_GET["id_proveedor"];
 
 			$respuesta = ModeloProveedores::mdlBorrarProveedor($tabla, $datos);
 

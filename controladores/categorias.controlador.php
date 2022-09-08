@@ -92,7 +92,7 @@ class ControladorCategorias{
 				$tabla = "categorias";
 
 				$datos = array("categoria"=>$_POST["editarCategoria"],
-					"id"=>$_POST["idCategoria"]);
+							  "id_categoria"=>$_POST["idCategoria"]);
 
 				$respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
 
@@ -151,7 +151,7 @@ class ControladorCategorias{
 
 		if(isset($_GET["idCategoria"])){
 
-			$tabla ="Categorias";
+			$tabla ="categorias";
 			$datos = $_GET["idCategoria"];
 
 			$respuesta = ModeloCategorias::mdlBorrarCategoria($tabla, $datos);

@@ -61,7 +61,7 @@
 				<a href="proveedores">
 
 					<i class="fa fa-product-hunt"></i>
-					<span>proveedores</span>
+					<span>Proveedores</span>
 
 				</a>
 

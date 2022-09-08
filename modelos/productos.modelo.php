@@ -41,14 +41,17 @@ class ModeloProductos{
 	=============================================*/
 	static public function mdlIngresarProducto($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, codigo, descripcion, imagen, stock, precio_compra, precio_venta) VALUES (:id_categoria, :codigo, :descripcion, :imagen, :stock, :precio_compra, :precio_venta)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO $tabla(id_categoria, id_proveedor,cod_producto,cod_fabrica, descripcion, imagen, stock, precio_lista,iva, precio_venta) VALUES (:id_categoria, :id_proveedor, :cod_producto, :cod_fabrica, :descripcion, :imagen, :stock, :precio_lista,:iva, :precio_venta)");
 
 		$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
-		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_proveedor", $datos["id_proveedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":cod_producto", $datos["cod_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_fabrica", $datos["cod_fabrica"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
-		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
+		$stmt->bindParam(":precio_lista", $datos["precio_lista"], PDO::PARAM_STR);
+		$stmt->bindParam(":iva", $datos["iva"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
 
 		if($stmt->execute()){
@@ -71,15 +74,19 @@ class ModeloProductos{
 	=============================================*/
 	static public function mdlEditarProducto($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_compra = :precio_compra, precio_venta = :precio_venta WHERE codigo = :codigo");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, id_proveedor = :id_proveedor, cod_producto= :cod_producto,cod_fabrica= :cod_fabrica,  descripcion = :descripcion, imagen = :imagen, stock = :stock, precio_lista = :precio_lista, iva= :iva precio_venta = :precio_venta WHERE cod_producto = :cod_producto");
 
 		$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
-		$stmt->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
+		$stmt->bindParam(":id_proveedor", $datos["id_proveedor"], PDO::PARAM_INT);
+		$stmt->bindParam(":cod_producto", $datos["cod_producto"], PDO::PARAM_STR);
+		$stmt->bindParam(":cod_fabrica", $datos["cod_fabrica"], PDO::PARAM_STR);
 		$stmt->bindParam(":descripcion", $datos["descripcion"], PDO::PARAM_STR);
 		$stmt->bindParam(":imagen", $datos["imagen"], PDO::PARAM_STR);
 		$stmt->bindParam(":stock", $datos["stock"], PDO::PARAM_STR);
-		$stmt->bindParam(":precio_compra", $datos["precio_compra"], PDO::PARAM_STR);
+		$stmt->bindParam(":precio_lista", $datos["precio_lista"], PDO::PARAM_STR);
+		$stmt->bindParam(":iva", $datos["iva"], PDO::PARAM_STR);
 		$stmt->bindParam(":precio_venta", $datos["precio_venta"], PDO::PARAM_STR);
+
 
 		if($stmt->execute()){
 

@@ -6,6 +6,9 @@ require_once "../modelos/productos.modelo.php";
 require_once "../controladores/categorias.controlador.php";
 require_once "../modelos/categorias.modelo.php";
 
+require_once "../controladores/proveedores.controlador.php";
+require_once "../modelos/proveedores.modelo.php";
+
 
 class TablaProductos{
 
@@ -43,7 +46,7 @@ class TablaProductos{
  	 		TRAEMOS LA CATEGORÍA
  	 		=============================================*/ 
 
- 	 		$item = "id";
+ 	 		$item = "id_categoria";
  	 		$valor = $productos[$i]["id_categoria"];
 
  	 		$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
@@ -76,7 +79,7 @@ class TablaProductos{
 
  	 		}else{
 
- 	 			$botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' codigo='".$productos[$i]["codigo"]."' imagen='".$productos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
+ 	 			$botones =  "<div class='btn-group'><button class='btn btn-warning btnEditarProducto' idProducto='".$productos[$i]["id"]."' data-toggle='modal' data-target='#modalEditarProducto'><i class='fa fa-pencil'></i></button><button class='btn btn-danger btnEliminarProducto' idProducto='".$productos[$i]["id"]."' cod_producto='".$productos[$i]["cod_producto"]."' imagen='".$productos[$i]["imagen"]."'><i class='fa fa-times'></i></button></div>"; 
 
  	 		}
 
@@ -84,7 +87,7 @@ class TablaProductos{
  	 		$datosJson .='[
  	 		"'.($i+1).'",
  	 		"'.$imagen.'",
- 	 		"'.$productos[$i]["codigo"].'",
+ 	 		"'.$productos[$i]["cod_producto"].'",
  	 		"'.$productos[$i]["descripcion"].'",
  	 		"'.$categorias["categoria"].'",
  	 		"'.$stock.'",

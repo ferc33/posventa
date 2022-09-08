@@ -82,13 +82,13 @@ if($_SESSION["perfil"] == "Vendedor"){
             <td>
 
               <div class="btn-group">
-                <button class="btn btn-warning btnEditarProveedor" idProveedor="'.$value["id"].'" data-toggle="modal" data-target="#modalEditarProveedor"><i class="fa fa-pencil"></i>
+                <button class="btn btn-warning btnEditarProveedor" idProveedor="'.$value["id_proveedor"].'" data-toggle="modal" data-target="#modalEditarProveedor"><i class="fa fa-pencil"></i>
                 </button>';
 
           if($_SESSION["perfil"] == "Administrador"){
 
             echo '
-                <button class="btn btn-danger btnEliminarProveedor" idProveedor="'.$value["id"].'"><i class="fa fa-times"></i>
+                <button class="btn btn-danger btnEliminarProveedor" idProveedor="'.$value["id_proveedor"].'"><i class="fa fa-times"></i>
                 </button>';
 
           }
