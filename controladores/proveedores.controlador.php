@@ -151,7 +151,9 @@ Class ControladorProveedores{
 		if(isset($_GET["idProveedor"])){
 
 			$tabla ="proveedores";
-			$datos = $_GET["id_proveedor"];
+
+			/* Getting the id of the category that is being deleted. */
+			$datos = $_GET["idProveedor"];
 
 			$respuesta = ModeloProveedores::mdlBorrarProveedor($tabla, $datos);
 

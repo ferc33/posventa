@@ -67,10 +67,10 @@ class ModeloProveedores{
 
 	static public function mdlEditarProveedor($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET proveedor = :proveedor WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET proveedor = :proveedor WHERE id_proveedor = :id_proveedor");
 
 		$stmt -> bindParam(":proveedor", $datos["proveedor"], PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $datos["id"], PDO::PARAM_INT);
+		$stmt -> bindParam(":id_proveedor", $datos["id_proveedor"], PDO::PARAM_INT);
 
 		if($stmt->execute()){
 
@@ -93,9 +93,9 @@ class ModeloProveedores{
 
 	static public function mdlBorrarProveedor($tabla, $datos){
 
-		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("DELETE FROM $tabla WHERE id_proveedor = :id_proveedor");
 
-		$stmt -> bindParam(":id", $datos, PDO::PARAM_INT);
+		$stmt -> bindParam(":id_proveedor", $datos, PDO::PARAM_INT);
 
 		if($stmt -> execute()){
 
