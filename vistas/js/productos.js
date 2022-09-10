@@ -134,6 +134,7 @@ $(".nuevoPorcentaje").change(function(){
 
 })
 
+
 $(".porcentaje").on("ifUnchecked",function(){
 
 	$("#nuevoPrecioVenta").prop("readonly",false);
@@ -241,13 +242,19 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
 			})
 
-			$("#editarCodigo").val(respuesta["codigo"]);
+			$("#editarCodigo").val(respuesta["cod_producto"]);
+
+			$("#editarCodigo").val(respuesta["cod_fabrica"]);
 
 			$("#editarDescripcion").val(respuesta["descripcion"]);
 
 			$("#editarStock").val(respuesta["stock"]);
 
-			$("#editarPrecioCompra").val(respuesta["precio_compra"]);
+			$("#editarPrecioCompra").val(respuesta["precio_lista"]);
+
+			$("#editarCodigo").val(respuesta["iva"]);
+
+			$("#editarCodigoFabrica".val(respuesta["ganancia"]))
 
 			$("#editarPrecioVenta").val(respuesta["precio_venta"]);
 
@@ -272,7 +279,7 @@ ELIMINAR PRODUCTO
 $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
-	var codigo = $(this).attr("codigo");
+	var codigo = $(this).attr("cod_codigo");
 	var imagen = $(this).attr("imagen");
 	
 	swal({
@@ -288,7 +295,7 @@ $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
 	}).then(function(result) {
 		if (result.value) {
 
-			window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&codigo="+codigo;
+			window.location = "index.php?ruta=productos&idProducto="+idProducto+"&imagen="+imagen+"&cod_codigo="+cod_codigo;
 
 		}
 
