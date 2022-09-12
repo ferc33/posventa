@@ -72,9 +72,9 @@ class imprimirFactura{
 				<td style="background-color:white; width:140px">
 					<div style="font-size:8.5px; text-align:right; line-height:15px;">
 						<br>
-						Teléfono: 300 786 52 49
+						Teléfono: 2267403958
 						<br>
-						ventas@rgsoft.com
+						fcassera@protonmail.com
 					</div>				
 				</td>
 				<td style="background-color:white; width:110px; text-align:center; color:red"><br><br>FACTURA N.<br>$valorVenta</td>

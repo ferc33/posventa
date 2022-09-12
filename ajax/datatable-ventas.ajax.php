@@ -63,7 +63,7 @@ class TablaProductosVentas{
  	 		$datosJson .='[
  	 		"'.($i+1).'",
  	 		"'.$imagen.'",
- 	 		"'.$productos[$i]["codigo"].'",
+ 	 		"'.$productos[$i]["cod_producto"].'",
  	 		"'.$productos[$i]["descripcion"].'",
  	 		"'.$stock.'",
  	 		"'.$botones.'"

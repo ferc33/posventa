@@ -26,7 +26,7 @@ class ControladorProductos{
 
 			if(preg_match('/^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ ]+$/', $_POST["nuevaDescripcion"]) &&
 				preg_match('/^[0-9]+$/', $_POST["nuevoStock"]) &&	
-				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioCompra"]) &&
+				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioLista"]) &&
 				preg_match('/^[0-9.]+$/', $_POST["nuevoPrecioVenta"])){
 
 		   		/*=============================================
@@ -98,13 +98,16 @@ class ControladorProductos{
 
 				$tabla = "productos";
 
-				$datos = array("id_categoria" => $_POST["nuevaCategoria"],
+				$datos = array(
+					"id_proveedor" => $_POST["nuevoProveedor"],
+					"id_categoria" => $_POST["nuevaCategoria"],
 					"cod_producto" => $_POST["nuevoCodigo"],
 					"cod_fabrica" => $_POST["nuevoCodigoFabrica"],
 					"descripcion" => $_POST["nuevaDescripcion"],
 					"stock" => $_POST["nuevoStock"],
-					"precio_lista" => $_POST["nuevoPrecioCompra"],
+					"precio_lista" => $_POST["nuevoPrecioLista"],
 					"iva" => $_POST["nuevoIva"],
+					"ganancia" => $_POST["nuevaGanancia"],
 					"precio_venta" => $_POST["nuevoPrecioVenta"],
 					"imagen" => $ruta);
 

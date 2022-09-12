@@ -126,7 +126,7 @@ class ControladorVentas{
 
 			if($respuesta == "ok"){
 
-				// $impresora = "epson20";
+				/* // $impresora = "epson20";
 				// $conector = new WindowsPrintConnector($impresora);
 				// $imprimir = new Printer($conector);
 				// $imprimir -> text("Hola Mundo"."\n");
@@ -171,7 +171,7 @@ class ControladorVentas{
 				// $printer -> feed(3); //Alimentamos el papel 3 veces*/
 				// $printer -> cut(); //Cortamos el papel, si la impresora tiene la opción
 				// $printer -> pulse(); //Por medio de la impresora mandamos un pulso, es útil cuando hay cajón moneder
-				// $printer -> close();
+				// $printer -> close(); */
 
 				echo'<script>
 				localStorage.removeItem("rango");
@@ -706,7 +706,7 @@ class ControladorVentas{
 			$objetoXML->writeRaw('<cfdi:CfdiRelacionados TipoRelacion="01">');
 				$objetoXML->writeRaw('<cfdi:CfdiRelacionado UUID="A39DA66B-52CA-49E3-879B-5C05185B0EF7" />');
 			$objetoXML->writeRaw('</cfdi:CfdiRelacionados>');
-			$objetoXML->writeRaw('
+			/* $objetoXML->writeRaw('
 				<cfdi:Emisor Rfc="LAHH850905BZ4" Nombre="HORACIO LLANOS" RegimenFiscal="608" />
 				    <cfdi:Receptor Rfc="HEPR930322977" Nombre="RAFAEL ALEJANDRO HERNÁNDEZ PALACIOS" UsoCFDI="G01" />
 				    <cfdi:Conceptos>
@@ -769,7 +769,7 @@ class ControladorVentas{
 
 			// }
 
-			// $objetoXML->writeRaw('</ext:UBLExtensions>');
+			// $objetoXML->writeRaw('</ext:UBLExtensions>'); */
 
 			$objetoXML->writeRaw('</cfdi:Comprobante>');
 

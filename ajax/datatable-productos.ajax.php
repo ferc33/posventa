@@ -46,11 +46,12 @@ class TablaProductos{
  	 		TRAEMOS LA CATEGORÍA
  	 		=============================================*/ 
 
- 	 		$item = "id_categoria";
+ 	 		$item = "id_categoria"; 
  	 		$valor = $productos[$i]["id_categoria"];
 
  	 		$categorias = ControladorCategorias::ctrMostrarCategorias($item, $valor);
 
+		
 		  	/*=============================================
  	 		STOCK
  	 		=============================================*/ 
@@ -91,7 +92,7 @@ class TablaProductos{
  	 		"'.$productos[$i]["descripcion"].'",
  	 		"'.$categorias["categoria"].'",
  	 		"'.$stock.'",
- 	 		"'.$productos[$i]["precio_compra"].'",
+ 	 		"'.$productos[$i]["precio_lista"].'",
  	 		"'.$productos[$i]["precio_venta"].'",
  	 		"'.$productos[$i]["fecha"].'",
  	 		"'.$botones.'"

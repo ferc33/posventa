@@ -9,6 +9,23 @@ require_once "../modelos/categorias.modelo.php";
 class AjaxProductos{
 
   /*=============================================
+  GENERAR CÓDIGO A PARTIR DE ID PROVEEDOR
+  =============================================*/
+  public $idProveedor;
+
+  public function ajaxCrearCodigoProductoProveedor(){
+
+  	$item = "id_proveedor";
+  	$valor = $this->idProveedor;
+    $orden = "id";
+
+    $respuesta = ControladorProductos::ctrMostrarProductos($item, $valor, $orden);
+
+    echo json_encode($respuesta);
+
+  }
+
+  /*=============================================
   GENERAR CÓDIGO A PARTIR DE ID CATEGORIA
   =============================================*/
   public $idCategoria;
@@ -75,7 +92,17 @@ class AjaxProductos{
   }
 
 }
+/*=============================================
+GENERAR CÓDIGO A PARTIR DE ID PROVEEDOR
+=============================================*/	
 
+if(isset($_POST["idProveedor"])){
+
+	$codigoProducto = new AjaxProductos();
+	$codigoProducto -> idProveedor = $_POST["idProveedor"];
+	$codigoProducto -> ajaxCrearCodigoProducto();
+
+}
 
 /*=============================================
 GENERAR CÓDIGO A PARTIR DE ID CATEGORIA
@@ -115,6 +142,9 @@ if(isset($_POST["traerProductos"])){
 /*=============================================
 TRAER PRODUCTO
 =============================================*/ 
+/* Comprobando si la variable nombreProducto está configurada. Si es así, crea un nuevo objeto
+AjaxProductos y establece la propiedad nombreProducto en el valor de la variable nombreProducto.
+Luego llama al método ajaxEditarProducto. */
 
 if(isset($_POST["nombreProducto"])){
 

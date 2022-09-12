@@ -91,15 +91,15 @@ CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
 /*=============================================
 AGREGANDO PRECIO DE VENTA
 =============================================*/
-$("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
+$("#nuevoPrecioLista, #editarPrecioLista").change(function(){
 
 	if($(".porcentaje").prop("checked")){
 
-		var valorPorcentaje = $(".nuevoPorcentaje").val();
+		var valorPorcentaje = $(".nuevaGanancia").val();
 		
-		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
+		var porcentaje = Number(($("#nuevoPrecioLista").val()*valorPorcentaje/100))+Number($("#nuevoPrecioLista").val());
 
-		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
+		var editarPorcentaje = Number(($("#editarPrecioLista").val()*valorPorcentaje/100))+Number($("#editarPrecioLista").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
 		$("#nuevoPrecioVenta").prop("readonly",true);
@@ -114,15 +114,17 @@ $("#nuevoPrecioCompra, #editarPrecioCompra").change(function(){
 /*=============================================
 CAMBIO DE PORCENTAJE
 =============================================*/
-$(".nuevoPorcentaje").change(function(){
+$(".nuevaGanancia").change(function(){
 
 	if($(".porcentaje").prop("checked")){
 
 		var valorPorcentaje = $(this).val();
-		
-		var porcentaje = Number(($("#nuevoPrecioCompra").val()*valorPorcentaje/100))+Number($("#nuevoPrecioCompra").val());
 
-		var editarPorcentaje = Number(($("#editarPrecioCompra").val()*valorPorcentaje/100))+Number($("#editarPrecioCompra").val());
+		var valorIva=$(this).val();
+		
+		var porcentaje = Number(($("#nuevoPrecioLista").val()*valorPorcentaje/100)*valorIva)+Number($("#nuevoPrecioLista").val());
+
+		var editarPorcentaje = Number(($("#editarPrecioLista").val()*valorPorcentaje/100))+Number($("#editarPrecioLista").val());
 
 		$("#nuevoPrecioVenta").val(porcentaje);
 		$("#nuevoPrecioVenta").prop("readonly",true);
@@ -242,19 +244,20 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function(){
 
 			})
 
+
 			$("#editarCodigo").val(respuesta["cod_producto"]);
 
-			$("#editarCodigo").val(respuesta["cod_fabrica"]);
+			$("#editarCodigoFabrica").val(respuesta["cod_fabrica"]);
 
 			$("#editarDescripcion").val(respuesta["descripcion"]);
 
 			$("#editarStock").val(respuesta["stock"]);
 
-			$("#editarPrecioCompra").val(respuesta["precio_lista"]);
+			$("#editarPrecioLista").val(respuesta["precio_lista"]);
 
-			$("#editarCodigo").val(respuesta["iva"]);
+			$("#editarIva").val(respuesta["iva"]);
 
-			$("#editarCodigoFabrica".val(respuesta["ganancia"]))
+			$("#editarGanancia".val(respuesta["ganancia"]))
 
 			$("#editarPrecioVenta").val(respuesta["precio_venta"]);
 
@@ -279,7 +282,7 @@ ELIMINAR PRODUCTO
 $(".tablaProductos tbody").on("click", "button.btnEliminarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
-	var codigo = $(this).attr("cod_codigo");
+	var cod_codigo = $(this).attr("cod_codigo");
 	var imagen = $(this).attr("imagen");
 	
 	swal({
