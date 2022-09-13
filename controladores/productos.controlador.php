@@ -252,12 +252,17 @@ class ControladorProductos{
 
 				$tabla = "productos";
 
-				$datos = array("id_categoria" => $_POST["editarCategoria"],
-					"codigo" => $_POST["editarCodigo"],
-					"descripcion" => $_POST["editarDescripcion"],
-					"stock" => $_POST["editarStock"],
-					"precio_compra" => $_POST["editarPrecioCompra"],
-					"precio_venta" => $_POST["editarPrecioVenta"],
+				$datos = array(
+					"id_proveedor" => $_POST["nuevoProveedor"],
+					"id_categoria" => $_POST["nuevaCategoria"],
+					"cod_producto" => $_POST["nuevoCodigo"],
+					"cod_fabrica" => $_POST["nuevoCodigoFabrica"],
+					"descripcion" => $_POST["nuevaDescripcion"],
+					"stock" => $_POST["nuevoStock"],
+					"precio_lista" => $_POST["nuevoPrecioLista"],
+					"iva" => $_POST["nuevoIva"],
+					"ganancia" => $_POST["nuevaGanancia"],
+					"precio_venta" => $_POST["nuevoPrecioVenta"],
 					"imagen" => $ruta);
 
 				$respuesta = ModeloProductos::mdlEditarProducto($tabla, $datos);

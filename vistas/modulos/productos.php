@@ -59,7 +59,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
               <th>Código</th>
               <th>Descripción</th>
               <th>Categoría</th>
-                    <th>Stock</th>
+              <th>Stock</th>
               <th>Precio de compra</th>
               <th>Precio de venta</th>
               <th>Agregado</th>
@@ -116,7 +116,7 @@ MODAL AGREGAR PRODUCTO
 
             <!-- ENTRADA PARA SELECCIONAR PROVEEDOR -->
 
-          <!--   <div class="form-group">
+            <div class="form-group">
 
               <div class="input-group">
 
@@ -144,7 +144,7 @@ MODAL AGREGAR PRODUCTO
 
               </div>
 
-            </div> -->
+            </div>
 
             <!-- ENTRADA PARA SELECCIONAR CATEGORÍA -->
 
