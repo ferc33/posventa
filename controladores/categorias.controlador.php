@@ -92,7 +92,7 @@ class ControladorCategorias{
 				$tabla = "categorias";
 
 				$datos = array("categoria"=>$_POST["editarCategoria"],
-							  "id_categoria"=>$_POST["idCategoria"]);
+							  "id"=>$_POST["idCategoria"]);
 
 				$respuesta = ModeloCategorias::mdlEditarCategoria($tabla, $datos);
 

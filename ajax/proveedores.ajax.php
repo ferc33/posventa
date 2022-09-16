@@ -13,7 +13,7 @@ class AjaxProveedores{
 
 	public function ajaxEditarProveedor(){
 
-		$item = "id_proveedor";
+		$item = "id";
 		$valor = $this->idProveedor;
 
 		$respuesta = ControladorProveedores::ctrMostrarProveedores($item, $valor);
