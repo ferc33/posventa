@@ -15,7 +15,13 @@ $.ajax({
 
 var perfilOculto = $("#perfilOculto").val();
 
+
+
+
 $('.tablaProductos').DataTable( {
+
+
+
     "ajax": "ajax/datatable-productos.ajax.php?perfilOculto="+perfilOculto,
     "deferRender": true,
 	"retrieve": true,
@@ -45,9 +51,16 @@ $('.tablaProductos').DataTable( {
 				"sSortDescending": ": Activar para ordenar la columna de manera descendente"
 			}
 
+			
 	}
 
-} );
+	
+
+} 
+
+
+
+);
 
 /*=============================================
 CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
@@ -197,6 +210,8 @@ $(".nuevaImagen").change(function(){
 
   	}
   })
+
+
 
 /*=============================================
 EDITAR PRODUCTO
