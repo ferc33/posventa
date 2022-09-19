@@ -23,6 +23,10 @@
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="vistas/bower_components/bootstrap/dist/css/bootstrap.min.css">
 
+  <!--font awesome con CDN-->  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">  
+      
+
   <!-- Font Awesome -->
   <link rel="stylesheet" href="vistas/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -67,10 +71,35 @@
   <script src="vistas/dist/js/adminlte.min.js"></script>
 
   <!-- DataTables -->
-  <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<!--   <script src="vistas/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="vistas/bower_components/datatables.net-bs/js/dataTables.responsive.min.js"></script>
-  <script src="vistas/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script>
+  <script src="vistas/bower_components/datatables.net-bs/js/responsive.bootstrap.min.js"></script> -->
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="vistas/bower_components/jquery/jquery-3.3.1.min.js"></script>
+    <script src="vistas/bower_components/popper/popper.min.js"></script>
+    <script src="vistas/bower_components/bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src="vistas/bower_components/datatables/datatables.min.js"></script>    
+     
+
+
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="vistas/bower_components/jquery/jquery-3.3.1.min.js"></script>
+    <script src="vistas/bower_components/popper/popper.min.js"></script>
+    <script src="vistas/bower_components/bootstrap/js/bootstrap.min.js"></script>
+      
+    <!-- datatables JS -->
+    <script type="text/javascript" src="vistas/bower_components/datatables/datatables.min.js"></script>    
+     
+    <!-- para usar botones en datatables JS -->  
+    <script src="vistas/bower_components/datatables/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+    <script src="vistas/bower_components/datatables/JSZip-2.5.0/jszip.min.js"></script>    
+    <script src="vistas/bower_components/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+    <script src="vistas/bower_components/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+    <script src="vistas/bower_components/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
 
   <!-- SweetAlert 2 -->
   <script src="vistas/plugins/sweetalert2/sweetalert2.all.js"></script>
