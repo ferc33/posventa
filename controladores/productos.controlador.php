@@ -99,12 +99,10 @@ class ControladorProductos{
 				$tabla = "productos";
 
 				$datos = array("id_categoria" => $_POST["nuevaCategoria"],
-					"cod_producto" => $_POST["nuevoCodigo"],
-					"cod_fabrica" => $_POST["nuevoCodigoFabrica"],
+					"codigo" => $_POST["nuevoCodigo"],					
 					"descripcion" => $_POST["nuevaDescripcion"],
 					"stock" => $_POST["nuevoStock"],
-					"precio_lista" => $_POST["nuevoPrecioCompra"],
-					"iva" => $_POST["nuevoIva"],
+					"precio_compra" => $_POST["nuevoPrecioCompra"],
 					"precio_venta" => $_POST["nuevoPrecioVenta"],
 					"imagen" => $ruta);
 

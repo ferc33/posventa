@@ -151,7 +151,7 @@ Class ControladorProveedores{
 		if(isset($_GET["idProveedor"])){
 
 			$tabla ="proveedores";
-			$datos = $_GET["id"];
+			$datos = $_GET["idProveedor"];
 
 			$respuesta = ModeloProveedores::mdlBorrarProveedor($tabla, $datos);
 
