@@ -19,7 +19,7 @@ $(".tablas").on("click", ".btnEditarCategoria", function(){
 		success: function(respuesta){
 
 			$("#editarCategoria").val(respuesta["categoria"]);
-			$("#idCategoria").val(respuesta["id_categoria"]);
+			$("#idCategoria").val(respuesta["id"]);
 
 		}
 
