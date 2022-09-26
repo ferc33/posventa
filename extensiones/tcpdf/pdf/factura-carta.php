@@ -59,13 +59,6 @@ class imprimirFactura
 
 		// ---------------------------------------------------------
 
-		/* 		2254490046 
-Av Víctor hugo 1116 Esq saavedra 
-A4polirrubro@gmail.com 
-Horario 8 a 23 hs 
-Domingo 9 a 22 hs */
-
-
 		$bloque1 = <<<EOF
 		<table>
 			<tr>
