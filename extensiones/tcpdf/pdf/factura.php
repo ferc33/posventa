@@ -70,11 +70,11 @@ class imprimirFactura{
 				<div>
 					Fecha: $fecha
 					<br><br>
-					Inventory System
+					Polirrubro A4
 					<br>
 					NIT: 71.759.963-9
 					<br>
-					Dirección: Calle 44B 92-11
+					Dirección: Av. Victor Hugo.
 					<br>
 					Teléfono: 300 786 52 49
 					<br>
@@ -168,5 +168,3 @@ class imprimirFactura{
 $factura = new imprimirFactura();
 $factura -> codigo = $_GET["codigo"];
 $factura -> traerImpresionFactura();
-
-?>
