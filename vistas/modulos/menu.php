@@ -1,14 +1,14 @@
 <aside class="main-sidebar">
 
-	 <section class="sidebar">
+	<section class="sidebar">
 
 		<ul class="sidebar-menu">
 
-		<?php
+			<?php
 
-		if($_SESSION["perfil"] == "Administrador"){
+			if ($_SESSION["perfil"] == "Administrador") {
 
-			echo '<li class="active">
+				echo '<li class="active">
 
 				<a href="inicio">
 
@@ -29,12 +29,11 @@
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Especial"){
-
-			echo '<li>
+				echo '<li>
 
 				<a href="categorias">
 
@@ -60,18 +59,17 @@
 
 				<a href="proveedores">
 
-					<i class="fa fa-product-hunt"></i>
+					<i class="fa fa-user-plus"></i>
 					<span>Proveedores</span>
 
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
-
-			echo '<li>
+				echo '<li>
 
 				<a href="clientes">
 
@@ -81,12 +79,25 @@
 				</a>
 
 			</li>';
+			}
 
-		}
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
 
-		if($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor"){
+				echo '<li>
 
-			echo '<li class="treeview">
+				<a href="gastos">
+
+					<i class="fa fa-minus-square"></i>
+					<span>Gastos</span>
+
+				</a>
+
+			</li>';
+			}
+
+			if ($_SESSION["perfil"] == "Administrador" || $_SESSION["perfil"] == "Vendedor") {
+
+				echo '<li class="treeview">
 
 				<a href="#">
 
@@ -126,7 +137,7 @@
 
 					</li>';
 
-					if($_SESSION["perfil"] == "Administrador"){
+				if ($_SESSION["perfil"] == "Administrador") {
 
 					echo '<li>
 
@@ -138,21 +149,19 @@
 						</a>
 
 					</li>';
+				}
 
-					}
 
-				
 
 				echo '</ul>
 
 			</li>';
+			}
 
-		}
-
-		?>
+			?>
 
 		</ul>
 
-	 </section>
+	</section>
 
 </aside>
