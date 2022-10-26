@@ -1,22 +1,23 @@
 <?php
-  session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html>
+
 <head>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>Inventory System</title>
+  <title>Polirrubro A4</title>
 
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-  <link rel="icon" href="vistas/img/plantilla/icono-negro.png">
+  <link rel="icon" href="vistas/img/plantilla/a4-logo-blanco.png">
 
-   <!--=====================================
+  <!--=====================================
   PLUGINS DE CSS
   ======================================-->
 
@@ -30,7 +31,7 @@
 
   <!-- Theme style -->
   <link rel="stylesheet" href="vistas/dist/css/AdminLTE.css">
-  
+
   <!-- AdminLTE Skins -->
   <link rel="stylesheet" href="vistas/dist/css/skins/_all-skins.min.css">
 
@@ -56,13 +57,13 @@
 
   <!-- jQuery 3 -->
   <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
-  
+
   <!-- Bootstrap 3.3.7 -->
   <script src="vistas/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
   <!-- FastClick -->
   <script src="vistas/bower_components/fastclick/lib/fastclick.js"></script>
-  
+
   <!-- AdminLTE App -->
   <script src="vistas/dist/js/adminlte.min.js"></script>
 
@@ -106,12 +107,12 @@ CUERPO DOCUMENTO
 ======================================-->
 
 <body class="hold-transition skin-blue sidebar-collapse sidebar-mini login-page">
-  
+
   <?php
 
-  if(isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok"){
+  if (isset($_SESSION["iniciarSesion"]) && $_SESSION["iniciarSesion"] == "ok") {
 
-   echo '<div class="wrapper">';
+    echo '<div class="wrapper">';
 
     /*=============================================
     CABEZOTE
@@ -129,33 +130,31 @@ CUERPO DOCUMENTO
     CONTENIDO
     =============================================*/
 
-    if(isset($_GET["ruta"])){
+    if (isset($_GET["ruta"])) {
 
-      if($_GET["ruta"] == "inicio" ||
-       $_GET["ruta"] == "usuarios" ||
-       $_GET["ruta"] == "categorias" ||
-       $_GET["ruta"] == "proveedores" ||
-       $_GET["ruta"] == "productos" ||
-       $_GET["ruta"] == "clientes" ||
-       $_GET["ruta"] == "ventas" ||
-       $_GET["ruta"] == "crear-venta" ||
-       $_GET["ruta"] == "editar-venta" ||
-       $_GET["ruta"] == "reportes" ||
-       $_GET["ruta"] == "salir"){
+      if (
+        $_GET["ruta"] == "inicio" ||
+        $_GET["ruta"] == "usuarios" ||
+        $_GET["ruta"] == "categorias" ||
+        $_GET["ruta"] == "proveedores" ||
+        $_GET["ruta"] == "productos" ||
+        $_GET["ruta"] == "clientes" ||
+        $_GET["ruta"] == "ventas" ||
+        $_GET["ruta"] == "crear-venta" ||
+        $_GET["ruta"] == "editar-venta" ||
+        $_GET["ruta"] == "reportes" ||
+        $_GET["ruta"] == "salir"
+      ) {
 
-        include "modulos/".$_GET["ruta"].".php";
+        include "modulos/" . $_GET["ruta"] . ".php";
+      } else {
 
-    }else{
+        include "modulos/404.php";
+      }
+    } else {
 
-      include "modulos/404.php";
-
+      include "modulos/inicio.php";
     }
-
-  }else{
-
-    include "modulos/inicio.php";
-
-  }
 
     /*=============================================
     FOOTER
@@ -164,11 +163,9 @@ CUERPO DOCUMENTO
     include "modulos/footer.php";
 
     echo '</div>';
-
-  }else{
+  } else {
 
     include "modulos/login.php";
-
   }
 
   ?>
@@ -183,4 +180,5 @@ CUERPO DOCUMENTO
   <script src="vistas/js/reportes.js"></script>
 
 </body>
+
 </html>

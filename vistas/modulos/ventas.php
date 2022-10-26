@@ -1,6 +1,6 @@
 <?php
 
-if($_SESSION["perfil"] == "Especial"){
+if ($_SESSION["perfil"] == "Especial") {
 
   echo '
   <script>
@@ -8,17 +8,15 @@ if($_SESSION["perfil"] == "Especial"){
   </script>';
 
   return;
-
 }
 
 $xml = ControladorVentas::ctrDescargarXML();
 
-if($xml){
+if ($xml) {
 
-  rename($_GET["xml"].".xml", "xml/".$_GET["xml"].".xml");
+  rename($_GET["xml"] . ".xml", "xml/" . $_GET["xml"] . ".xml");
 
-  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/'.$_GET["xml"].'.xml" href="ventas">Se ha creado correctamente el archivo XML <span class="fa fa-times pull-right"></span></a>';
-
+  echo '<a class="btn btn-block btn-success abrirXML" archivo="xml/' . $_GET["xml"] . '.xml" href="ventas">Se ha creado correctamente el archivo XML <span class="fa fa-times pull-right"></span></a>';
 }
 
 ?>
@@ -35,7 +33,7 @@ if($xml){
     <ol class="breadcrumb">
 
       <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
-      
+
       <li class="active">Administrar ventas</li>
 
     </ol>
@@ -61,18 +59,16 @@ if($xml){
         <button type="button" class="btn btn-default pull-right" id="daterange-btn">
 
           <span>
-            <i class="fa fa-calendar"></i> 
+            <i class="fa fa-calendar"></i>
 
             <?php
 
-            if(isset($_GET["fechaInicial"])){
+            if (isset($_GET["fechaInicial"])) {
 
-              echo $_GET["fechaInicial"]." - ".$_GET["fechaFinal"];
-
-            }else{
+              echo $_GET["fechaInicial"] . " - " . $_GET["fechaFinal"];
+            } else {
 
               echo 'Rango de fecha';
-
             }
 
             ?>
@@ -86,122 +82,115 @@ if($xml){
 
       <div class="box-body">
 
-       <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
+        <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
 
-        <thead>
+          <thead>
 
-         <tr>
+            <tr>
 
-           <th style="width:10px">#</th>
-           <th>Código factura</th>
-           <th>Cliente</th>
-           <th>Vendedor</th>
-           <th>Forma de pago</th>
-           <th>Neto</th>
-           <th>Total</th> 
-           <th>Fecha</th>
-           <th>Acciones</th>
+              <th style="width:10px">#</th>
+              <th>Código factura</th>
+              <th>Cliente</th>
+              <th>Vendedor</th>
+              <th>Forma de pago</th>
+              <th>Neto</th>
+              <th>Total</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
 
-         </tr> 
+            </tr>
 
-       </thead>
+          </thead>
 
-       <tbody>
+          <tbody>
 
-        <?php
+            <?php
 
-        if(isset($_GET["fechaInicial"])){
+            if (isset($_GET["fechaInicial"])) {
 
-          $fechaInicial = $_GET["fechaInicial"];
-          $fechaFinal = $_GET["fechaFinal"];
+              $fechaInicial = $_GET["fechaInicial"];
+              $fechaFinal = $_GET["fechaFinal"];
+            } else {
 
-        }else{
+              $fechaInicial = null;
+              $fechaFinal = null;
+            }
 
-          $fechaInicial = null;
-          $fechaFinal = null;
+            $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
 
-        }
+            foreach ($respuesta as $key => $value) {
 
-        $respuesta = ControladorVentas::ctrRangoFechasVentas($fechaInicial, $fechaFinal);
+              echo '<tr>
 
-        foreach ($respuesta as $key => $value) {
+         <td>' . ($key + 1) . '</td>
 
-         echo '<tr>
+         <td>' . $value["codigo"] . '</td>';
 
-         <td>'.($key+1).'</td>
+              $itemCliente = "id";
+              $valorCliente = $value["id_cliente"];
 
-         <td>'.$value["codigo"].'</td>';
+              $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
 
-         $itemCliente = "id";
-         $valorCliente = $value["id_cliente"];
+              echo '<td>' . $respuestaCliente["nombre"] . '</td>';
 
-         $respuestaCliente = ControladorClientes::ctrMostrarClientes($itemCliente, $valorCliente);
+              $itemUsuario = "id";
+              $valorUsuario = $value["id_vendedor"];
 
-         echo '<td>'.$respuestaCliente["nombre"].'</td>';
+              $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
 
-         $itemUsuario = "id";
-         $valorUsuario = $value["id_vendedor"];
+              echo '<td>' . $respuestaUsuario["nombre"] . '</td>
 
-         $respuestaUsuario = ControladorUsuarios::ctrMostrarUsuarios($itemUsuario, $valorUsuario);
+         <td>' . $value["metodo_pago"] . '</td>
 
-         echo '<td>'.$respuestaUsuario["nombre"].'</td>
+         <td>$ ' . number_format($value["neto"], 2) . '</td>
 
-         <td>'.$value["metodo_pago"].'</td>
+         <td>$ ' . number_format($value["total"], 2) . '</td>
 
-         <td>$ '.number_format($value["neto"],2).'</td>
-
-         <td>$ '.number_format($value["total"],2).'</td>
-
-         <td>'.$value["fecha"].'</td>
+         <td>' . $value["fecha"] . '</td>
 
          <td>
 
          <div class="btn-group">
 
-         <a class="btn btn-success" href="index.php?ruta=ventas&xml='.$value["codigo"].'">xml</a>
-         <a class="btn btn-primary" href="extensiones/tcpdf/pdf/factura.php?codigo='.$value["codigo"].'" target="_blank">ticket</a>
-         <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$value["codigo"].'">
+         <a class="btn btn-success" href="index.php?ruta=ventas&xml=' . $value["codigo"] . '">xml</a>
+         <a class="btn btn-primary" href="extensiones/tcpdf/pdf/factura.php?codigo=' . $value["codigo"] . '" target="_blank">ticket</a>
+         <button class="btn btn-info btnImprimirFactura" codigoVenta="' . $value["codigo"] . '">
          <i class="fa fa-print"></i>
 
          </button>';
 
-         if($_SESSION["perfil"] == "Administrador"){
+              if ($_SESSION["perfil"] == "Administrador") {
 
-          echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$value["id"].'"><i class="fa fa-pencil"></i></button>
+                echo '<button class="btn btn-warning btnEditarVenta" idVenta="' . $value["id"] . '"><i class="fa fa-pencil"></i></button>
 
-          <button class="btn btn-danger btnEliminarVenta" idVenta="'.$value["id"].'"><i class="fa fa-times"></i></button>';
+          <button class="btn btn-danger btnEliminarVenta" idVenta="' . $value["id"] . '"><i class="fa fa-times"></i></button>';
+              }
 
-        }
-
-        echo '</div>  
+              echo '</div>  
 
         </td>
 
         </tr>';
-      }
+            }
 
-      ?>
+            ?>
 
-    </tbody>
+          </tbody>
 
-  </table>
+        </table>
 
-  <?php
+        <?php
 
-  $eliminarVenta = new ControladorVentas();
-  $eliminarVenta -> ctrEliminarVenta();
+        $eliminarVenta = new ControladorVentas();
+        $eliminarVenta->ctrEliminarVenta();
 
-  ?>
+        ?>
 
+
+      </div>
+
+    </div>
+
+  </section>
 
 </div>
-
-</div>
-
-</section>
-
-</div>
-
-
-
-
