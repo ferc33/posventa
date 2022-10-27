@@ -62,6 +62,7 @@ class ModeloProductos
 		$stmt->close();
 		$stmt = null;
 	}
+	
 
 	/*=============================================
 	EDITAR PRODUCTO
