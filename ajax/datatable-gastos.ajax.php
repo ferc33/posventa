@@ -4,7 +4,7 @@ require_once "../controladores/productos.controlador.php";
 require_once "../modelos/productos.modelo.php";
 
 
-class TablaProductosVentas
+class TablaGastos
 {
 
          /*=============================================

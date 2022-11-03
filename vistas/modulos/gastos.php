@@ -1,383 +1,405 @@
 <?php
 
-if ($_SESSION["perfil"] == "Especial") {
+if ($_SESSION["perfil"] == "Vendedor") {
 
-         echo '
-  <script>
-    window.location = "inicio";
+  echo '<script>
+
+  window.location = "inicio";
+
   </script>';
 
-         return;
+  return;
 }
 
 ?>
 
 <div class="content-wrapper">
 
-         <section class="content-header">
+  <section class="content-header">
 
-                  <h1>
+    <h1>
 
-                           Añadir gasto
+      Administrar gastos
 
-                  </h1>
+    </h1>
 
-                  <ol class="breadcrumb">
+    <ol class="breadcrumb">
 
-                           <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+      <li><a href="inicio"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-                           <li class="active">Crear venta</li>
+      <li class="active">Administrar Gastos</li>
 
-                  </ol>
+    </ol>
 
-         </section>
+  </section>
 
-         <section class="content">
+  <section class="content">
 
-                  <div class="row">
+    <div class="box">
 
-                           <!--=====================================
-      EL FORMULARIO
-      ======================================-->
+      <div class="box-header with-border">
 
-                           <div class="col-lg-5 col-xs-12">
+        <button class="btn btn-danger" data-toggle="modal" data-target="#modalAgregarGasto">
 
-                                    <div class="box box-success">
+          <i class="fa fa-minus-circle" aria-hidden="true"></i> Gasto
 
-                                             <div class="box-header with-border"></div>
+        </button>
 
-                                             <form role="form" method="post" class="formularioVenta">
+        <button class="btn btn-success" data-toggle="modal" data-target="#modalAgregarCategoriaGasto">
 
-                                                      <div class="box-body">
+          <i class="fa fa-tag" aria-hidden="true"></i> Categoria
 
-                                                               <div class="box">
+        </button>
 
-                                                                        <!--=====================================
-                ENTRADA DEL VENDEDOR
-                ======================================-->
 
-                                                                        <div class="form-group">
+      </div>
 
-                                                                                 <div class="input-group">
+      <div class="box-body">
 
-                                                                                          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        <table class="table table-bordered table-striped dt-responsive tablas" width="100%">
 
-                                                                                          <input type="text" class="form-control" id="nuevoVendedor" value="<?php echo $_SESSION["nombre"]; ?>" readonly>
+          <thead>
 
-                                                                                          <input type="hidden" name="idVendedor" value="<?php echo $_SESSION["id"]; ?>">
+            <tr>
 
-                                                                                 </div>
+              <th style="width:10px">#</th>
+              <th>Descripcion</th>
+              <th>Categoria</th>
+              <th>Fecha</th>
+              <th style="width:10px">Acciones</th>
 
-                                                                        </div>
+            </tr>
 
-                                                                        <!--=====================================
-                ENTRADA DEL CÓDIGO
-                ======================================-->
+          </thead>
 
-                                                                        <div class="form-group">
+          <tbody>
 
-                                                                                 <div class="input-group">
+            <?php
 
-                                                                                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+            $item = null;
+            $valor = null;
 
-                                                                                          <?php
+            $categoria_gasto = ControladorCategoriasGastos::ctrMostrarCategoriasGastos($item, $valor);
 
-                                                                                          $item = null;
-                                                                                          $valor = null;
+            foreach ($categoria_gasto as $key => $value) {
 
-                                                                                          $ventas = ControladorVentas::ctrMostrarVentas($item, $valor);
+              echo ' 
+          <tr>
+              <td>' . ($key + 1) . '</td>
+              <td class="text-uppercase">' . $value["categoria"] . '</td>
+            <td>
 
-                                                                                          if (!$ventas) {
+              <div class="btn-group">
+                <button class="btn btn-warning btnEditarGasto" idCategoriaGasto="' . $value["id"] . '" data-toggle="modal" data-target="#modalEditarCategoriaGasto"><i class="fa fa-pencil"></i>
+                </button>';
 
-                                                                                                   echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
-                                                                                          } else {
+              if ($_SESSION["perfil"] == "Administrador") {
 
-                                                                                                   // foreach ($ventas as $key => $value) {
+                echo '
+                <button class="btn btn-danger btnEliminarGasto" idCategoriaGasto="' . $value["id"] . '"><i class="fa fa-times"></i>
+                </button>';
+              }
 
-                                                                                                   // }
-                                                                                                   $value = end($ventas);
+              echo '
+              </div>  
 
-                                                                                                   $codigo = $value["codigo"] + 1;
+            </td>
 
-                                                                                                   echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="' . $codigo . '" readonly>';
-                                                                                          }
+          </tr>';
+            }
 
-                                                                                          ?>
+            ?>
 
-                                                                                 </div>
+          </tbody>
 
-                                                                        </div>
+        </table>
 
-                                                                        <!--=====================================
-                ENTRADA DEL CLIENTE
-                ======================================-->
+      </div>
 
-                                                                        <div class="form-group">
+    </div>
 
-                                                                                 <div class="input-group">
-
-                                                                                          <span class="input-group-addon"><i class="fa fa-users"></i></span>
-
-                                                                                          <select class="form-control" id="seleccionarCliente" name="seleccionarCliente" required>
-
-                                                                                                   <option value="">Seleccionar cliente</option>
-
-                                                                                                   <?php
-
-                                                                                                   $item = null;
-                                                                                                   $valor = null;
-
-                                                                                                   $categorias = ControladorClientes::ctrMostrarClientes($item, $valor);
-
-                                                                                                   foreach ($categorias as $key => $value) {
-
-                                                                                                            echo '<option value="' . $value["id"] . '">' . $value["nombre"] . '</option>';
-                                                                                                   }
-
-                                                                                                   ?>
-
-                                                                                          </select>
-
-                                                                                          <span class="input-group-addon"><button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#modalAgregarGasto" data-dismiss="modal">Agregar gasto</button></span>
-
-                                                                                 </div>
-
-                                                                        </div>
-
-                                                                        <!--=====================================
-                ENTRADA PARA AGREGAR PRODUCTO
-                ======================================-->
-
-                                                                        <div class="form-group row nuevoProducto">
-
-                                                                        </div>
-
-                                                                        <input type="hidden" id="listaProductos" name="listaProductos">
-
-                                                                        <!--=====================================
-                BOTÓN PARA AGREGAR PRODUCTO
-                ======================================-->
-
-                                                                        <button type="button" class="btn btn-default hidden-lg btnAgregarProducto">Agregar producto</button>
-
-                                                                        <hr>
-
-                                                                        <div class="row">
-
-                                                                        </div>
-
-                                                                        <hr>
-
-                                                                        <br>
-
-                                                               </div>
-
-                                                      </div>
-
-                                                      <div class="box-footer">
-
-                                                               <button type="submit" class="btn btn-primary pull-right">Guardar venta</button>
-
-                                                      </div>
-
-                                             </form>
-
-                                             <?php
-
-                                             $guardarVenta = new ControladorVentas();
-                                             $guardarVenta->ctrCrearVenta();
-
-                                             ?>
-
-                                    </div>
-
-                           </div>
-
-                           <!--=====================================
-      LA TABLA DE PRODUCTOS
-      ======================================-->
-
-                           <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
-
-                                    <div class="box box-warning">
-
-                                             <div class="box-header with-border"></div>
-
-                                             <div class="box-body">
-
-                                                      <table class="table table-bordered table-striped dt-responsive tablaVentas">
-
-                                                               <thead>
-
-                                                                        <tr>
-                                                                                 <th style="width: 10px">#</th>
-                                                                                 <th>Imagen</th>
-                                                                                 <th>Código</th>
-                                                                                 <th>Descripcion</th>
-                                                                                 <th>Stock</th>
-                                                                                 <th>Acciones</th>
-                                                                        </tr>
-
-                                                               </thead>
-
-                                                      </table>
-
-                                             </div>
-
-                                    </div>
-
-
-                           </div>
-
-                  </div>
-
-         </section>
+  </section>
 
 </div>
 
 <!--=====================================
-MODAL AGREGAR CLIENTE
+MODAL AGREGAR  GASTO
 ======================================-->
 
 <div id="modalAgregarGasto" class="modal fade" role="dialog">
 
-         <div class="modal-dialog">
+  <div class="modal-dialog">
 
-                  <div class="modal-content">
+    <div class="modal-content">
 
-                           <form role="form" method="post">
+      <form role="form" method="post">
 
-                                    <!--=====================================
+        <!--=====================================
         CABEZA DEL MODAL
         ======================================-->
 
-                                    <div class="modal-header" style="background:#3c8dbc; color:white">
+        <div class="modal-header" style="background:#3c8dbc; color:white">
 
-                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                             <h4 class="modal-title">Agregar gasto</h4>
+          <h4 class="modal-title">Agregar Egreso</h4>
 
-                                    </div>
+        </div>
 
-                                    <!--=====================================
+        <!--=====================================
         CUERPO DEL MODAL
         ======================================-->
 
-                                    <div class="modal-body">
+        <div class="modal-body">
 
-                                             <div class="box-body">
+          <div class="box-body">
 
-                                                      <!-- ENTRADA PARA EL NOMBRE -->
+            <!-- ENTRADA PARA CATEGORIA DE GASTO -->
 
-                                                      <div class="form-group">
+            <div class="form-group">
 
-                                                               <div class="input-group">
+              <div class="input-group">
 
-                                                                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                <span class="input-group-addon"><i class="fa fa-book"></i></span>
 
-                                                                        <input type="text" class="form-control input-lg" name="nuevoCliente" placeholder="Ingresar nombre" required>
+                <select class=" form-control input-lg" id="nuevaCategoria" name="nuevaCategoria" required>
 
-                                                               </div>
+                  <option value="">Tipo de gasto</option>
 
-                                                      </div>
+                  <?php
 
-                                                      <!-- ENTRADA PARA EL DOCUMENTO ID -->
+                  $item = null;
+                  $valor = null;
 
-                                                      <div class="form-group">
+                  $categoria_gasto = ControladorCategoriasGastos::ctrMostrarCategoriasGastos($item, $valor);
 
-                                                               <div class="input-group">
+                  foreach ($categoria_gasto as $key => $value) {
 
-                                                                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                    echo '<option value="' . $value["id"] . '">' . $value["categoria"] . '</option>';
+                  }
 
-                                                                        <input type="number" min="0" class="form-control input-lg" name="nuevoDocumentoId" placeholder="Ingresar documento" required>
+                  ?>
 
-                                                               </div>
+                </select>
 
-                                                      </div>
+              </div>
 
-                                                      <!-- ENTRADA PARA EL EMAIL -->
+            </div>
 
-                                                      <div class="form-group">
+            <!-- ENTRADA PARA DESCRIPCION -->
 
-                                                               <div class="input-group">
+            <div class="form-group">
 
-                                                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <div class="input-group">
 
-                                                                        <input type="email" class="form-control input-lg" name="nuevoEmail" placeholder="Ingresar email" required>
+                <span class="input-group-addon"><i class="fa fa-list"></i></span>
 
-                                                               </div>
+                <input type="text" class="form-control input-lg" name="nuevoProveedor" placeholder="Descripcion de gasto" required>
 
-                                                      </div>
+              </div>
 
-                                                      <!-- ENTRADA PARA EL TELÉFONO -->
+            </div>
 
-                                                      <div class="form-group">
 
-                                                               <div class="input-group">
+            <div class="form-group">
 
-                                                                        <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+              <div class="input-group">
 
-                                                                        <input type="text" class="form-control input-lg" name="nuevoTelefono" placeholder="Ingresar teléfono" data-inputmask="'mask':'(999) 999-9999'" data-mask required>
+                <span class="input-group-addon"><i class="fa fa-money"></i></span>
 
-                                                               </div>
+                <input type="text" class="form-control input-lg" name="nuevoProveedor" placeholder="Egreso de dinero" required>
 
-                                                      </div>
+              </div>
 
-                                                      <!-- ENTRADA PARA LA DIRECCIÓN -->
+            </div>
 
-                                                      <div class="form-group">
+          </div>
 
-                                                               <div class="input-group">
+        </div>
 
-                                                                        <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-
-                                                                        <input type="text" class="form-control input-lg" name="nuevaDireccion" placeholder="Ingresar dirección" required>
-
-                                                               </div>
-
-                                                      </div>
-
-                                                      <!-- ENTRADA PARA LA FECHA DE NACIMIENTO -->
-
-                                                      <div class="form-group">
-
-                                                               <div class="input-group">
-
-                                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-
-                                                                        <input type="text" class="form-control input-lg" name="nuevaFechaNacimiento" placeholder="Ingresar fecha nacimiento" data-inputmask="'alias': 'yyyy/mm/dd'" data-mask required>
-
-                                                               </div>
-
-                                                      </div>
-
-                                             </div>
-
-                                    </div>
-
-                                    <!--=====================================
+        <!--=====================================
         PIE DEL MODAL
         ======================================-->
 
-                                    <div class="modal-footer">
+        <div class="modal-footer">
 
-                                             <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-                                             <button type="submit" class="btn btn-primary">Guardar cliente</button>
+          <button type="submit" class="btn btn-primary">Guardar proveedor</button>
 
-                                    </div>
+        </div>
 
-                           </form>
+        <?php
 
-                           <?php
+        $crearProveedor = new ControladorProveedores();
+        $crearProveedor->ctrCrearProveedor();
 
-                           $crearCliente = new ControladorClientes();
-                           $crearCliente->ctrCrearCliente();
+        ?>
 
-                           ?>
+      </form>
 
-                  </div>
+    </div>
 
-         </div>
+  </div>
 
 </div>
+
+
+<div id="modalAgregarCategoriaGasto" class="modal fade" role="dialog">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Agregar categoría</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA EL NOMBRE -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="text" class="form-control input-lg" name="nuevaCategoria" placeholder="Ingresar categoría" required>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar categoría</button>
+
+        </div>
+
+        <?php
+
+        $crearCategoria = new ControladorCategorias();
+        $crearCategoria->ctrCrearCategoria();
+
+        ?>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!--=====================================
+MODAL EDITAR PROVEEDOR
+======================================-->
+
+<div id="modalEditarProveedor" class="modal fade" role="dialog">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <form role="form" method="post">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">Editar proveedor</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+
+          <div class="box-body">
+
+            <!-- ENTRADA PARA EL NOMBRE -->
+
+            <div class="form-group">
+
+              <div class="input-group">
+
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="text" class="form-control input-lg" name="editarProveedor" id="editarProveedor" required>
+
+                <input type="hidden" name="idProveedor" id="idProveedor" required>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
+
+          <button type="submit" class="btn btn-primary">Guardar cambios</button>
+
+        </div>
+
+        <?php
+
+        $editarProveedor = new ControladorProveedores();
+        $editarProveedor->ctrEditarProveedor();
+
+        ?>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<?php
+
+$borrarProveedor = new ControladorProveedores();
+$borrarProveedor->ctrBorrarProveedor();
+
+?>

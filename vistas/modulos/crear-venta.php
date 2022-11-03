@@ -286,9 +286,23 @@ if ($_SESSION["perfil"] == "Especial") {
       LA TABLA DE PRODUCTOS
       ======================================-->
 
+
+
       <div class="col-lg-7 hidden-md hidden-sm hidden-xs">
 
         <div class="box box-warning">
+
+          <div class="form-group">
+
+            <div class="input-group">
+
+              <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+
+              <input type="text" class="form-control pull-right" value="" name="CodigoDeBarras" id="CodigoDeBarras" placeholder="Codigo de barras">
+
+            </div>
+
+          </div>
 
           <div class="box-header with-border"></div>
 
@@ -470,3 +484,37 @@ MODAL AGREGAR CLIENTE
   </div>
 
 </div>
+
+<script type="text/javascript">
+  window.onload = function() {
+    listarProductos();
+    $('#nuevaCantidadProducto').trigger("change");
+
+  }
+
+  //SEGUIMIENTO DEL STOCK EN LA VENTA POR LINEA
+  var totalP = new Array();
+
+  //SEGUIMIENTO DEL STOCK EN LA VENTA POR PRODUCTO
+  var stockP = new Array();
+
+  //RENGLON DE LA VENTA
+  var lngContador = 0;
+
+
+
+  $(document).ready(function() {
+    $("#CodigoDeBarras").keydown(function(event) {
+
+      var term = $(this).val();
+
+
+      if (event.which == 13) {
+
+
+        agregarProductoCodigoBarras($("#CodigoDeBarras").val());
+
+      }
+    });
+  });
+</script>
