@@ -179,60 +179,38 @@ function agregarProductoCodigoBarras(valor = "") {
           }
 
           $(".nuevoProducto").append(
-            '<div class="row" style="padding:5px 15px" id="row' +
-              lngContador +
-              '">' +
-              '<div class="' +
-              lngContador +
-              '" id="renglonProducto"' +
-              " </div> " +
+            '<div class="row" style="padding:5px 15px">' +
               "<!-- Descripción del producto -->" +
-              '  <div class="col-xs-1" style="padding-right:0px">' +
-              '             <div class="input-group"> ' +
-              '<button type="button" class="btn btn-danger quitarProducto" idProducto="' +
-              idProducto +
-              '"><STRONG>X</STRONG></button>' +
-              "             </div>" +
-              "           </div>" +
-              '<div class="col-xs-5" style="padding-right:0px">' +
+              '<div class="col-xs-6" style="padding-right:0px">' +
               '<div class="input-group">' +
-              '<input type="text" id="nuevaDescripcionProducto"  class="form-control nuevaDescripcionProducto" renglon="' +
-              lngContador +
-              '" idProducto="' +
+              '<span class="input-group-addon"><button type="button" class="btn btn-danger btn-xs quitarProducto" idProducto="' +
+              idProducto +
+              '"><i class="fa fa-times"></i></button></span>' +
+              '<input type="text" class="form-control nuevaDescripcionProducto" idProducto="' +
               idProducto +
               '" name="agregarProducto" value="' +
               descripcion +
-              '"  required>' +
+              '" readonly required>' +
               "</div>" +
               "</div>" +
               "<!-- Cantidad del producto -->" +
-              '<div class="col-xs-2">' +
-              '<input type="number" class="form-control nuevaCantidadProducto" step="any" name="nuevaCantidadProducto" min="1" value="1" stock="' +
+              '<div class="col-xs-3">' +
+              '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="' +
               stock +
               '" nuevoStock="' +
               Number(stock - 1) +
               '" required>' +
               "</div>" +
-              "<!-- Precio unitario -->" +
-              '<div class="col-xs-2">' +
-              '<input type="number" step="any" class="form-control nuevoPrecioUnitarioProducto" name="nuevoPrecioUnitarioProducto"  value="' +
-              precio +
-              '"  required>' +
-              //'<input type="text" class="form-control nuevoPrecioUnitarioProducto"  name="nuevoPrecioUnitarioProducto" value="'+precio+'"  required>'+
-
-              "</div>" +
               "<!-- Precio del producto -->" +
-              '<div class="col-xs-2 ingresoPrecio" style="padding-left:0px" >' +
+              '<div class="col-xs-3 ingresoPrecio" style="padding-left:0px">' +
               '<div class="input-group">' +
               '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>' +
-              '<input type="text" class="form-control nuevoPrecioProducto" readonly precioReal="' +
+              '<input type="text" class="form-control nuevoPrecioProducto" precioReal="' +
               precio +
               '" name="nuevoPrecioProducto" value="' +
               precio +
-              '"  required>' +
+              '" readonly required>' +
               "</div>" +
-              "</div>" +
-              //'<button class="btn btn-success btnActivar" ><strong>1</strong></button>'+
               "</div>" +
               "</div>"
           );

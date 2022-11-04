@@ -243,8 +243,9 @@ if ($_SESSION["perfil"] == "Especial") {
                       <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago" required>
                         <option value="">Seleccione método de pago</option>
                         <option value="Efectivo">Efectivo</option>
-                        <option value="TC">Tarjeta Crédito</option>
+                        <option value="TC">Mercado Pago</option>
                         <option value="TD">Tarjeta Débito</option>
+                        
                       </select>
 
                     </div>
@@ -485,6 +486,10 @@ MODAL AGREGAR CLIENTE
 
 </div>
 
+<!--==================================
+   METODO AJAX QUE AÑADE A LA TABLA 
+======================================-->
+
 <script type="text/javascript">
   window.onload = function() {
     listarProductos();
@@ -511,8 +516,8 @@ MODAL AGREGAR CLIENTE
 
       if (event.which == 13) {
 
-
-        agregarProductoCodigoBarras($("#CodigoDeBarras").val());
+        //Funcion que se encuentra en ventas.js
+           agregarProductoCodigoBarras($("#CodigoDeBarras").val());
 
       }
     });
