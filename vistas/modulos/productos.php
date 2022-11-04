@@ -48,7 +48,7 @@ if ($_SESSION["perfil"] == "Vendedor") {
 
       <div class="box-body">
 
-        <table class="table table-bordered table-striped dt-responsive tablaProductos" width="100%">
+        <table class="table table-bordered table-striped dt-responsive tablaProductos" id="datatables" width="100%">
 
           <thead>
 
@@ -522,3 +522,6 @@ $eliminarProducto = new ControladorProductos();
 $eliminarProducto->ctrEliminarProducto();
 
 ?>
+
+<!-- <script type="text/javascript" src="vistas/js/productos.js">
+<script type="text/javascript" src="ajax/datatable-productos.ajax.php"> -->

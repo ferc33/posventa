@@ -73,7 +73,7 @@
 
 				<a href="clientes">
 
-					<i class="fa fa-users"></i>
+					<i class="fa-solid fa-address-book"></i>
 					<span>Clientes</span>
 
 				</a>

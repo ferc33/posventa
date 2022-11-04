@@ -205,6 +205,7 @@ $(".tablaProductos tbody").on("click", "button.btnEditarProducto", function () {
         success: function (respuesta) {
           $("#editarCategoria").val(respuesta["id"]);
           $("#editarCategoria").html(respuesta["categoria"]);
+          
         },
       });
 

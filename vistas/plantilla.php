@@ -55,6 +55,10 @@ session_start();
   PLUGINS DE JAVASCRIPT
   ======================================-->
 
+  <!-- Font awesome --> 
+
+  <script src="https://kit.fontawesome.com/538ced9db2.js" crossorigin="anonymous"></script>
+
   <!-- jQuery 3 -->
   <script src="vistas/bower_components/jquery/dist/jquery.min.js"></script>
 
@@ -98,7 +102,7 @@ session_start();
   <script src="vistas/bower_components/morris.js/morris.min.js"></script>
 
   <!-- ChartJS http://www.chartjs.org/-->
-  <script src="vistas/bower_components/Chart.js/Chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
