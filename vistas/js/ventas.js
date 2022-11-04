@@ -46,6 +46,227 @@ $(".tablaVentas").DataTable({
 });
 
 /*=============================================
+ AGREGA PRODUCTO CON EL LECTOR DEL CODIGO DE BARRAS
+ =============================================*/
+
+function agregarProductoCodigoBarras(valor = "") {
+  console.log(valor);
+
+  //BUSCAR ID
+  var datosLector = new FormData();
+  datosLector.append("buscarCodigoBarras", "buscarCodigoBarras");
+  datosLector.append("codigoBarras", valor);
+
+  var idProducto = "";
+  var categoria = "";
+
+  $.ajax({
+    url: "ajax/productos.ajax.php",
+    method: "POST",
+    data: datosLector,
+    cache: false,
+    contentType: false,
+    processData: false,
+    dataType: "json",
+    success: function (respuesta) {
+      idProducto = respuesta["id"];
+      categoria = respuesta["id_categoria"];
+      console.log("respuesta", respuesta);
+      console.log("idProducto", idProducto);
+
+      if (respuesta == false) {
+        swal({
+          title: "El código no existe",
+          type: "error",
+          confirmButtonText: "¡Cerrar!",
+        });
+        $("#CodigoDeBarras").val("");
+        return;
+      }
+
+      var minimoCompra = $(this).attr("minimoCOmpra");
+
+      if (minimoCompra == "") {
+        minimoCompra = 1;
+      }
+
+      lngContador = lngContador + 1;
+
+      if (totalP[idProducto] == null) {
+        totalP[idProducto] = 0;
+      }
+
+      //$(this).removeClass("btn-primary agregarProducto");
+
+      $(this).addClass("btn-default");
+
+      var datos = new FormData();
+      datos.append("idProducto", idProducto);
+      datos.append("categoria", categoria);
+
+      $.ajax({
+        url: "ajax/productos.ajax.php",
+        method: "POST",
+        data: datos,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (respuesta) {
+          console.log("respuesta", respuesta);
+          var descripcion = respuesta["descripcion"];
+          var stock = respuesta["stock"];
+          var precio = respuesta["precio_venta"];
+
+          stockP[idProducto] = stock;
+
+          /*=============================================
+                     EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
+                     =============================================*/
+
+          if (
+            stock - totalP[idProducto] == 0 &&
+            document.getElementById("TipoVenta").value != "COT"
+          ) {
+            swal({
+              title: "No hay stock disponible",
+              type: "error",
+              confirmButtonText: "¡Cerrar!",
+            });
+
+            $("button[idProducto='" + idProducto + "']").addClass(
+              "btn-primary agregarProducto"
+            );
+
+            return;
+          }
+
+          if (lngContador > 1) {
+            var contadorProductos = 0;
+
+            //NOS TRAEMOS TODA LOS PRODUCTOS QUE HEMOS AGREGADO A LA VENTA
+            var jsonProductos = $("#listaProductos").val();
+
+            //LO AGREGAMOS A UN ARREGLO
+            var myArr = JSON.parse(jsonProductos);
+
+            //RECORREMOS TODO EL ARREGLO DE LOS ṔRODUCTOS AGREGADOS A LA VENTA
+            $.each(myArr, function (i, item) {
+              //console.log(myArr[i].renglon);
+
+              //HACE LA SUMA DE LA CANTIDAD SI EL PRODUCTO ES EL MISMO AL QUE ESTAMOS MODIFICANDO Y SI ESTA EN DIFIRENTE RENGLON
+              if (idProducto == myArr[i].id) {
+                contadorProductos =
+                  Number(contadorProductos) + Number(myArr[i].cantidad);
+              }
+            });
+
+            //VALIDA STOCK CON LO YA AGREGAMOS A LA VENTA MAS
+            if (
+              stockP[idProducto] < 1 + contadorProductos &&
+              document.getElementById("TipoVenta").value != "COT"
+            ) {
+              $(this).val(stockP[idProducto] - contadorProductos);
+
+              swal({
+                title: "No hay stock disponible",
+                type: "error",
+                confirmButtonText: "¡Cerrar!",
+              });
+
+              return;
+            }
+          }
+
+          $(".nuevoProducto").append(
+            '<div class="row" style="padding:5px 15px" id="row' +
+              lngContador +
+              '">' +
+              '<div class="' +
+              lngContador +
+              '" id="renglonProducto"' +
+              " </div> " +
+              "<!-- Descripción del producto -->" +
+              '  <div class="col-xs-1" style="padding-right:0px">' +
+              '             <div class="input-group"> ' +
+              '<button type="button" class="btn btn-danger quitarProducto" idProducto="' +
+              idProducto +
+              '"><STRONG>X</STRONG></button>' +
+              "             </div>" +
+              "           </div>" +
+              '<div class="col-xs-5" style="padding-right:0px">' +
+              '<div class="input-group">' +
+              '<input type="text" id="nuevaDescripcionProducto"  class="form-control nuevaDescripcionProducto" renglon="' +
+              lngContador +
+              '" idProducto="' +
+              idProducto +
+              '" name="agregarProducto" value="' +
+              descripcion +
+              '"  required>' +
+              "</div>" +
+              "</div>" +
+              "<!-- Cantidad del producto -->" +
+              '<div class="col-xs-2">' +
+              '<input type="number" class="form-control nuevaCantidadProducto" step="any" name="nuevaCantidadProducto" min="1" value="1" stock="' +
+              stock +
+              '" nuevoStock="' +
+              Number(stock - 1) +
+              '" required>' +
+              "</div>" +
+              "<!-- Precio unitario -->" +
+              '<div class="col-xs-2">' +
+              '<input type="number" step="any" class="form-control nuevoPrecioUnitarioProducto" name="nuevoPrecioUnitarioProducto"  value="' +
+              precio +
+              '"  required>' +
+              //'<input type="text" class="form-control nuevoPrecioUnitarioProducto"  name="nuevoPrecioUnitarioProducto" value="'+precio+'"  required>'+
+
+              "</div>" +
+              "<!-- Precio del producto -->" +
+              '<div class="col-xs-2 ingresoPrecio" style="padding-left:0px" >' +
+              '<div class="input-group">' +
+              '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>' +
+              '<input type="text" class="form-control nuevoPrecioProducto" readonly precioReal="' +
+              precio +
+              '" name="nuevoPrecioProducto" value="' +
+              precio +
+              '"  required>' +
+              "</div>" +
+              "</div>" +
+              //'<button class="btn btn-success btnActivar" ><strong>1</strong></button>'+
+              "</div>" +
+              "</div>"
+          );
+
+          // SUMAR TOTAL DE PRECIOS
+
+          sumarTotalPrecios();
+
+          // AGREGAR IMPUESTO
+
+          agregarImpuesto();
+
+          // AGRUPAR PRODUCTOS EN FORMATO JSON
+
+          listarProductos();
+
+          // PONER FORMATO AL PRECIO DE LOS PRODUCTOS
+
+          $(".nuevoPrecioProducto").number(true, 2);
+
+          localStorage.removeItem("quitarProducto");
+
+          totalP[idProducto] = totalP[idProducto] + 1;
+          stockP[idProducto] = stock;
+
+          console.log(idProducto, totalP[idProducto]);
+          $("#CodigoDeBarras").val("");
+        },
+      });
+    },
+  });
+}
+
+/*=============================================
 AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 =============================================*/
 

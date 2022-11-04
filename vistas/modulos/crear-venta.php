@@ -92,9 +92,8 @@ if ($_SESSION["perfil"] == "Especial") {
                       echo '<input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta" value="10001" readonly>';
                     } else {
 
-                      // foreach ($ventas as $key => $value) {
-
-                      // }
+          /*             foreach ($ventas as $key => $value) {
+                      } */
                       $value = end($ventas);
 
                       $codigo = $value["codigo"] + 1;
@@ -144,17 +143,18 @@ if ($_SESSION["perfil"] == "Especial") {
 
                 </div>
 
+                
+
+
                 <!--=====================================
                 ENTRADA PARA AGREGAR PRODUCTO
                 ======================================-->
 
                 <div class="form-group row nuevoProducto">
-
-
-
                 </div>
 
                 <input type="hidden" id="listaProductos" name="listaProductos">
+                
 
                 <!--=====================================
                 BOTÓN PARA AGREGAR PRODUCTO
